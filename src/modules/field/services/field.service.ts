@@ -56,6 +56,7 @@ export class FieldService extends BaseService<FieldEntity, FieldRepository> {
                     {
                         alias: 'field',
                         columns: [
+                            'id',
                             'name',
                             'createdAt',
                             'description',
