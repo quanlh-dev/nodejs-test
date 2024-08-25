@@ -36,6 +36,11 @@ import ConfigKey from '../../config/config-key';
                         logPath: 'logs/query.log',
                     }),
                     synchronize: false,
+                    extra: {
+                        ssl: {
+                            rejectUnauthorized: false,
+                        },
+                    },
                 };
 
                 return options;
