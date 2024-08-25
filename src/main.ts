@@ -43,15 +43,6 @@ async function bootstrap() {
 
     app.useGlobalPipes(new JoiValidationPipe());
 
-    // app.useGlobalPipes(
-    //     new ValidationPipe({
-    //         whitelist: true,
-    //         transform: false,
-    //         dismissDefaultMessages: true,
-    //         exceptionFactory: (errors) => new ValidationException(errors),
-    //     }),
-    // );
-
     // setup max request size
     app.use(
         express.json({ limit: configService.get(ConfigKey.MAX_REQUEST_SIZE) }),
@@ -63,7 +54,7 @@ async function bootstrap() {
         }),
     );
     // use winston for logger
-    // app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+    app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
     // setup context provider
     app.use(expressCtx);
