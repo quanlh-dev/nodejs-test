@@ -1,0 +1,12 @@
+{
+    "error": {
+        "notFound": "File not found",
+        "exist": "File already exists",
+        "notExist": "File does not exist"
+    },
+    "success": {
+        "create": "File created successfully",
+        "update": "File updated successfully",
+        "delete": "File deleted successfully"
+    }
+}

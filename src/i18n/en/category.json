@@ -1,0 +1,12 @@
+{
+    "error": {
+        "notFound": "Category not found",
+        "exist": "Category already exists",
+        "notExist": "Category does not exist"
+    },
+    "success": {
+        "create": "Category created successfully",
+        "update": "Category updated successfully",
+        "delete": "Category deleted successfully"
+    }
+}

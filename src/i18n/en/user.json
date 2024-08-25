@@ -1,0 +1,51 @@
+{
+    "fields": {
+        "email": "Email",
+        "fullName": "Full name",
+        "password": "Password",
+        "phoneNumber": "Phone number",
+        "birthday": "Birthday",
+        "address": "Address",
+        "hometownAddress": "Hometown address",
+        "provinceId": "Province Id",
+        "gender": "Gender",
+        "role": "Role",
+        "position": "Position",
+        "avatarId": "Avatar ID",
+        "citizenIdIssuedAt": "Citizen ID issued at",
+        "bank": "Bank",
+        "bankAccount": "Bank account",
+        "taxCode": "Tax code",
+        "socialInsurance": "Social insurance",
+        "note": "Note",
+        "citizenId": "Citizen id"
+    },
+    "common": {
+        "error": {
+            "user.notFound": "User not exist!",
+            "email": {
+                "exist": "Email exists!"
+            },
+            "citizenId.exist": "CitizenId exists!",
+            "taxCode.exist": "Tax code exists!",
+            "bankAccount.exist": "Bank account exists!",
+            "socialInsurance.exist": "Social insurance exists!",
+            "contract.exist": "Contract of this user exists, please delete contract before remove user!",
+            "province.notExist": "Province does not exist!",
+            "positionId.notExist": "Position does not exist!",
+            "asset.exist": "Asset assigned to this user exist, please assign it to another before remove user!"
+        }
+    },
+    "delete.success": "Delete user successfully",
+    "status": {
+        "error": {
+            "notAllow": "This status is not allowed"
+        }
+    },
+    "position": {
+        "nameExisted": "This position name is already exist",
+        "positionNotExist": "This position with this id = {id} is not exist",
+        "hasUserRef": "This position with this  id = {id} cannot delete, because some user has this position",
+        "invalid": "Some users have deleting position, please change that position before submit"
+    }
+}

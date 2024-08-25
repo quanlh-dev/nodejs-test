@@ -1,0 +1,12 @@
+{
+    "error": {
+        "notFound": "Action not found",
+        "exist": "Action already exists",
+        "notExist": "Action does not exist"
+    },
+    "success": {
+        "create": "Action created successfully",
+        "update": "Action updated successfully",
+        "delete": "Action deleted successfully"
+    }
+}

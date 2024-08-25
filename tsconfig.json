@@ -6,16 +6,37 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "esModuleInterop": true,
+    "target": "ESNext",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "baseUrl": "./",
-    "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "paths": {
+      "~common": [
+        "src/common"
+      ],
+      "~config/*": [
+        "src/common/config/*"
+      ],
+      "~base/*": [
+        "src/common/base/*"
+      ],
+      "~plugins": [
+        "src/plugins"
+      ],
+      "~i18n": [
+        "src/i18n"
+      ],
+      "~database/*": [
+        "database/*"
+      ],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
 }

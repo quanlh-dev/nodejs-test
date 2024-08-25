@@ -1,0 +1,13 @@
+{
+    "error": {
+        "notFound": "Product not found",
+        "exist": "Product already exists",
+        "notExist": "Product does not exist",
+        "dupplicateQrCode": "Duplicate QR code"
+    },
+    "success": {
+        "create": "Product created successfully",
+        "update": "Product updated successfully",
+        "delete": "Product deleted successfully"
+    }
+}
