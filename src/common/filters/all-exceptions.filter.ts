@@ -24,6 +24,7 @@ import {
     BadRequestException as CustomBadRequestException,
 } from '~common';
 import { unwrapJoiMessage } from '~plugins';
+
 const getLanguage = (request: Request): string => {
     const lang = request?.headers['accept-language'];
     const supportedLanguages = Object.values(LANGUAGES) as string[];
@@ -73,7 +74,6 @@ const translateErrorValidator = async (
 
 const handleBadRequestException = async (
     exception: BadRequestException,
-    request: Request,
 ): Promise<IErrorResponse> => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = exception.getResponse() as any;
@@ -154,9 +154,9 @@ export class HttpExceptionFilter extends BaseExceptionFilter {
                 this.logger,
             );
         } else if (exception instanceof BadRequestException) {
-            res = await handleBadRequestException(exception, request);
+            res = await handleBadRequestException(exception);
         } else if (exception instanceof ValidationException) {
-            res = await handleBadRequestException(exception, request);
+            res = await handleBadRequestException(exception);
         } else if (
             exception instanceof NotFoundException ||
             exception instanceof CustomBadRequestException

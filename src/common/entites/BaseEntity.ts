@@ -1,14 +1,10 @@
-import { ContextProvider } from './../providers/context.provider';
 import {
     Column,
     CreateDateColumn,
     DeleteDateColumn,
     PrimaryGeneratedColumn,
-    UpdateDateColumn,
     BaseEntity as TypeOrmBaseEntity,
-    BeforeInsert,
-    BeforeUpdate,
-    BeforeSoftRemove,
+    UpdateDateColumn,
 } from 'typeorm';
 
 export type EntityId = number;
@@ -38,20 +34,5 @@ export abstract class BaseEntity extends TypeOrmBaseEntity {
     static tableName(): string {
         return '';
         // return this.getRepository().metadata.tableName;
-    }
-
-    @BeforeInsert()
-    setCreatedBy() {
-        this.createdBy = ContextProvider.getAuthUser()?.id;
-    }
-
-    @BeforeUpdate()
-    setUpdatedBy() {
-        this.updatedBy = ContextProvider.getAuthUser()?.id;
-    }
-
-    @BeforeSoftRemove()
-    setDeleteBy() {
-        this.deletedBy = ContextProvider.getAuthUser()?.id;
     }
 }

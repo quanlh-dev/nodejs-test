@@ -13,18 +13,17 @@ export class FieldResponseDto extends ResponseDto {
     name?: string;
     type?: string;
 
-    constructor(user?: FieldEntity) {
+    constructor(field?: FieldEntity) {
         super();
-        // this.user = user;
-        this.id = user?.id;
-        this.createdAt = user?.createdAt;
-        this.updatedAt = user?.updatedAt;
-        this.createdBy = user?.createdBy;
-        this.updatedBy = user?.updatedBy;
-        this.offsetFrom = user?.offsetFrom;
-        this.offsetTo = user?.offsetTo;
-        this.description = user?.description;
-        this.name = user?.name;
-        this.type = user?.type;
+        this.id = field?.id;
+        this.createdAt = field?.createdAt;
+        this.updatedAt = field?.updatedAt;
+        this.createdBy = field?.createdBy;
+        this.updatedBy = field?.updatedBy;
+        this.offsetFrom = field?.offsetFrom;
+        this.offsetTo = field?.offsetTo;
+        this.description = field?.description;
+        this.name = field?.name;
+        this.type = field?.type;
     }
 }

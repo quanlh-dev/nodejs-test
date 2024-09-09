@@ -1,48 +1,21 @@
-import { RequestDto, convertEnumToValues, PHONE_NUMBER_REGEX } from '~common';
-import { ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
-import type { ValidationOptions } from 'class-validator';
-import { registerDecorator } from 'class-validator';
+import { ApiProperty, ApiPropertyOptions } from '@nestjs/swagger';
 import Joi from 'joi';
-import JoiDateExtension from '@joi/date';
 import {
-    METADATA_KEY,
-    MIN_PAGE,
-    MAX_PAGE,
-    DEFAULT_PAGE,
-    MIN_LIMIT,
-    MAX_LIMIT,
+    convertEnumToValues,
     DEFAULT_LIMIT,
-    MAX_LENGTH_SEARCH_KEYWORD,
-    ORDER_DIRECTION,
-    DEFAULT_ORDER_DIRECTION,
     DEFAULT_ORDER_BY,
-    BIRTHDAY_MIN_DATE,
-    DATE_FORMAT,
-    INPUT_TEXT_MAX_LENGTH,
+    DEFAULT_ORDER_DIRECTION,
+    DEFAULT_PAGE,
+    MAX_LENGTH_SEARCH_KEYWORD,
+    MAX_LIMIT,
+    MAX_PAGE,
+    METADATA_KEY,
+    MIN_LIMIT,
+    MIN_PAGE,
+    ORDER_DIRECTION,
+    RequestDto,
 } from '~common';
-import { JoiMessage } from '~plugins';
-
-const JoiDate = Joi.extend(JoiDateExtension);
-
-export function IsPassword(
-    validationOptions?: ValidationOptions,
-): PropertyDecorator {
-    return (object, propertyName: string) => {
-        registerDecorator({
-            propertyName,
-            name: 'isPassword',
-            target: object.constructor,
-            constraints: [],
-            options: validationOptions,
-            validator: {
-                validate(value: string) {
-                    return /^[\d!#$%&*@A-Z^a-z]*$/.test(value);
-                },
-            },
-        });
-    };
-}
 
 type JoiValidateOptions = ApiPropertyOptions;
 
@@ -78,30 +51,6 @@ export function JoiRequired(schema?: Joi.AnySchema): PropertyDecorator {
         ? JoiValidate(schema.required(), { required: true })
         : JoiValidate(Joi.required(), { required: true });
 }
-
-// export function JoiArray<T extends RequestDto>(
-//     dtoClassOrItemSchema: T | Joi.AnySchema,
-//     schema?: Joi.ArraySchema,
-// ): PropertyDecorator {
-//     console.log();
-
-//     let itemSchema = Joi.any();
-//     let itemType: any = 'string';
-//     if (Joi.isSchema(dtoClassOrItemSchema)) {
-//         itemSchema = dtoClassOrItemSchema;
-//         itemType = dtoClassOrItemSchema.type;
-//     } else {
-//         itemSchema = (dtoClassOrItemSchema as any)?.getJoiSchema() ?? Joi.any();
-//         itemType = dtoClassOrItemSchema;
-//     }
-
-//     const joiSchema = Joi.array().items(itemSchema).concat(schema);
-//     const decorators = [
-//         JoiValidate(joiSchema),
-//         ApiProperty({ isArray: true, type: itemType }),
-//     ];
-//     return applyDecorators(...decorators);
-// }
 
 export function JoiArray<T>(
     type: (new () => T) | any,
@@ -206,17 +155,6 @@ export function SearchKeyword(): PropertyDecorator {
     );
 }
 
-export function Password(): PropertyDecorator {
-    return applyDecorators(
-        JoiValidate(
-            Joi.string()
-                .min(6)
-                .max(INPUT_TEXT_MAX_LENGTH)
-                .label('user.fields.password'),
-        ),
-    );
-}
-
 export function OrderDirection(): PropertyDecorator {
     return applyDecorators(
         JoiEnum(ORDER_DIRECTION, Joi.string().default(DEFAULT_ORDER_DIRECTION)),
@@ -244,28 +182,4 @@ export function OrderBy(
             JoiOptional(),
         ],
     );
-}
-
-export function Birthday(): PropertyDecorator {
-    return applyDecorators(
-        JoiValidate(
-            JoiDate.date()
-                .format(DATE_FORMAT.YYYY_MM_DD_HYPHEN)
-                .min(BIRTHDAY_MIN_DATE)
-                .max(Date.now())
-                .messages(
-                    new JoiMessage({
-                        'date.max': 'Birthday must be smaller than current day',
-                    }),
-                ),
-        ),
-    );
-}
-
-export function PhoneNumber(): PropertyDecorator {
-    return applyDecorators(JoiValidate(Joi.string().regex(PHONE_NUMBER_REGEX)));
-}
-
-export function Id(): PropertyDecorator {
-    return applyDecorators(JoiValidate(Joi.number().min(1).positive()));
 }

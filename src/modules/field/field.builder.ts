@@ -6,8 +6,4 @@ export class FieldQueryBuilder extends BaseQueryBuilder<FieldEntity> {
     constructor(queryBuilder: QueryBuilder<FieldEntity>) {
         super(queryBuilder);
     }
-
-    public filterByEmail(email: string) {
-        return this.filterByColumn('email', email);
-    }
 }

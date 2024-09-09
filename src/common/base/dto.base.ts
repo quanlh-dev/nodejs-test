@@ -3,7 +3,7 @@ import BaseJoi from 'joi';
 
 export class RequestDto {
     constructor() {
-        console.log('');
+        //
     }
 
     static getJoiSchema() {
@@ -20,13 +20,6 @@ export class QueryParamDto extends RequestDto {}
 export class RequestBodyDto extends RequestDto {}
 export class ResponseDto {
     constructor() {
-        console.log('');
-    }
-
-    static getOmitProperties(): string[] {
-        return (
-            Reflect.getMetadata(METADATA_KEY.OMIT_PROPERTY, this.prototype) ??
-            []
-        );
+        // TODO:
     }
 }

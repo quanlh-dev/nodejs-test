@@ -22,6 +22,8 @@ import ConfigKey from '../../config/config-key';
                 const isDevelopment =
                     configService.get(ConfigKey.NODE_ENV) ===
                     Enviroment.DEVELOPMENT;
+                const isLocal =
+                    configService.get(ConfigKey.NODE_ENV) === Enviroment.LOCAL;
                 const options: TypeOrmModuleOptions = {
                     name: 'default',
                     type: 'postgres',
@@ -36,12 +38,15 @@ import ConfigKey from '../../config/config-key';
                         logPath: 'logs/query.log',
                     }),
                     synchronize: false,
-                    extra: {
+                };
+
+                if (!isLocal) {
+                    options['extra' as any] = {
                         ssl: {
                             rejectUnauthorized: false,
                         },
-                    },
-                };
+                    };
+                }
 
                 return options;
             },

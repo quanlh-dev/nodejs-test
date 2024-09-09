@@ -2,7 +2,6 @@
 import i18n from 'i18n-js';
 import en from './en';
 import vi from './vi';
-import validation from './en/validation.json';
 
 i18n.fallbacks = true;
 i18n.translations = { en, vi };
@@ -14,7 +13,6 @@ i18n.locale = 'en';
  * Update to your default locale of choice if not English.
  */
 export type DefaultLocale = typeof en;
-export type ValidationKey = keyof typeof validation;
 /*eslint-disable-next-line @typescript-eslint/ban-types*/
 export type I18Key = RecursiveKeyOf<DefaultLocale> | String;
 

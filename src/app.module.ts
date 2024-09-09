@@ -6,8 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from '~config/configuration';
 import { FieldModule } from './modules/field/field.module';
 import { I18nModule } from './common/modules/i18n/i18n.module';
-import { CommonModule } from '~common';
 import { WinstonModule } from './common/modules/winston/winston.module';
+import { CommonModule } from './common/modules/common.module';
 
 @Module({
     imports: [
@@ -15,11 +15,11 @@ import { WinstonModule } from './common/modules/winston/winston.module';
             isGlobal: true,
             load: [configuration],
         }),
-        CommonModule,
-        WinstonModule,
+        I18nModule,
         DatabaseModule,
         FieldModule,
-        I18nModule,
+        WinstonModule,
+        CommonModule,
     ],
     controllers: [AppController],
     providers: [AppService],

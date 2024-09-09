@@ -4,7 +4,6 @@ import { FieldQueryBuilder } from './field.builder';
 import { Injectable } from '@nestjs/common';
 import { FieldEntity } from 'src/common/entites/field.entity';
 
-// @EntityRepository(FieldEntity)
 @Injectable()
 export class FieldRepository extends BaseRepository<FieldEntity> {
     constructor(private dataSource: DataSource) {

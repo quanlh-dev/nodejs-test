@@ -31,14 +31,7 @@ export class FieldController extends BaseController {
         super();
     }
 
-    @Get('/test')
-    // @Auth([`${PERMISSION_ACTION.CREATE}_${PERMISSION_RESOURCE.USER}`])
-    async test() {
-        return 'field/test';
-    }
-
     @Get()
-    // @Auth(['readAll_field'])
     async getFields(
         @Query()
         query: FieldListQueryStringDto,

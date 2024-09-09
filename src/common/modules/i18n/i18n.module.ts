@@ -6,13 +6,6 @@ import {
 } from 'nestjs-i18n';
 import * as path from 'path';
 
-// class I18Loader extends I18nAbstractLoader {
-//     load(): Promise<any> {
-//         return Promise.resolve(this.loadTranslations());
-//     }
-
-// }
-
 @Global()
 @Module({
     imports: [

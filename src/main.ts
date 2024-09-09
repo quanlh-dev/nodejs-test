@@ -1,7 +1,4 @@
-import './common/boilerplate.polyfill';
-import './plugins/lodash';
-import 'config';
-import { Enviroment, SWAGGER_BEARER_AUTH_NAME } from './common/constants';
+import { Enviroment } from './common/constants';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
@@ -17,8 +14,6 @@ import {
     SwaggerModule,
 } from '@nestjs/swagger';
 import { JoiValidationPipe } from '~common';
-import { middleware as expressCtx } from 'express-ctx';
-import { setupDev } from '~plugins';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -56,9 +51,6 @@ async function bootstrap() {
     // use winston for logger
     app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
-    // setup context provider
-    app.use(expressCtx);
-
     // setup for development mode
     // swagger ui
     if (configService.get(ConfigKey.NODE_ENV) === Enviroment.DEVELOPMENT) {
@@ -66,17 +58,6 @@ async function bootstrap() {
             .setTitle('Example')
             .setDescription('API description')
             .setVersion('1.0')
-            .addBearerAuth(
-                {
-                    type: 'http',
-                    scheme: 'bearer',
-                    bearerFormat: 'JWT',
-                    name: 'JWT',
-                    description: 'Enter JWT token',
-                    in: 'header',
-                },
-                SWAGGER_BEARER_AUTH_NAME,
-            )
             .addTag('example')
             .build();
         const document = SwaggerModule.createDocument(app, config);
@@ -92,8 +73,6 @@ async function bootstrap() {
                 ConfigKey.PORT,
             )}${SWAGGER_PATH}]`,
         );
-
-        setupDev();
     }
 
     await app.listen(configService.get(ConfigKey.PORT));

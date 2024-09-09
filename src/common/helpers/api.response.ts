@@ -61,7 +61,3 @@ export class ErrorResponse {
         return err;
     }
 }
-
-export function notFoundResponse() {
-    return new ErrorResponse(HttpStatus.NOT_FOUND, 'notFound');
-}
