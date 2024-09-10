@@ -1,13 +1,12 @@
 import {
+    BaseEntity,
     EntityManager,
     EntityTarget,
     FindManyOptions,
-    FindOptionsWhere,
     QueryRunner,
     Repository as TypeormRepository,
 } from 'typeorm';
 import { BaseQueryBuilder } from '~common';
-import { BaseEntity } from '../entites/BaseEntity';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unused-vars
 interface IRepository<T extends BaseEntity> {}
@@ -29,16 +28,9 @@ export abstract class BaseRepository<T extends BaseEntity>
     }
 
     abstract builder(alias: string): BaseQueryBuilder<T>;
-    abstract getDetailByFindCondition(
-        findCondition: FindOptionsWhere<T>,
-    ): Promise<T>;
 
     async isExist(where: FindManyOptions<T>): Promise<boolean> {
         const count = await this.count(where);
         return count > 0;
-    }
-
-    async getDetailById(id: number): Promise<T> {
-        return await this.getDetailByFindCondition({ id } as any);
     }
 }

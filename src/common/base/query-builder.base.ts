@@ -1,11 +1,6 @@
-import {
-    ColumnOfEntity,
-    columnsWithAlias,
-    ColumnOfEntityWithAlias,
-} from '~common';
-import { BaseEntity } from 'src/common/entites/BaseEntity';
-import { Brackets, Like, QueryBuilder, SelectQueryBuilder } from 'typeorm';
 import _ from 'lodash';
+import { BaseEntity, QueryBuilder, SelectQueryBuilder } from 'typeorm';
+import { ColumnOfEntityWithAlias, columnsWithAlias } from '~common';
 
 export abstract class BaseQueryBuilder<
     T extends BaseEntity,
@@ -26,32 +21,5 @@ export abstract class BaseQueryBuilder<
         if (_.isArray(cWAs)) {
             return this.select(columnsWithAlias(cWAs));
         } else return this.select(columnsWithAlias([cWAs]));
-    }
-
-    search(columnNames: ColumnOfEntity<T>[], keyword: string): this {
-        const searchColumns = columnNames as string[];
-        return this.andWhere(
-            new Brackets((qb) => {
-                qb.where(
-                    searchColumns.map((searchColumn) => ({
-                        [searchColumn]: Like(`%${keyword}%`),
-                    })),
-                );
-            }),
-        );
-    }
-
-    orderByColumn(
-        columnName: ColumnOfEntity<T>,
-        orderDirection: 'ASC' | 'DESC',
-    ): this {
-        return this.orderBy(
-            `${this.alias}.${columnName as string}`,
-            orderDirection,
-        );
-    }
-
-    pagination(page: number, limit: number): this {
-        return this.take(limit).skip((page - 1) * limit);
     }
 }

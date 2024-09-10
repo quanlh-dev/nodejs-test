@@ -4,15 +4,9 @@ import {
     Get,
     InternalServerErrorException,
     Post,
-    Query,
 } from '@nestjs/common';
-import { FieldRepository } from './field.repository';
-
-import { DatabaseService } from '../../common/modules/database/database.service';
-import { FieldListQueryStringDto } from './dto/requests/field-list.request.dto';
-
 import { ApiTags } from '@nestjs/swagger';
-import { BaseController, HttpStatus } from '~common';
+import { HttpStatus } from '~common';
 import {
     ErrorResponse,
     SuccessResponse,
@@ -22,22 +16,13 @@ import { FieldService } from './services/field.service';
 
 @Controller('field')
 @ApiTags('field')
-export class FieldController extends BaseController {
-    constructor(
-        private readonly fieldsService: FieldService,
-        private readonly databaseService: DatabaseService,
-        private readonly fieldRepository: FieldRepository,
-    ) {
-        super();
-    }
+export class FieldController {
+    constructor(private readonly fieldsService: FieldService) {}
 
     @Get()
-    async getFields(
-        @Query()
-        query: FieldListQueryStringDto,
-    ) {
+    async getFields() {
         try {
-            const data = await this.fieldsService.getFields(query);
+            const data = await this.fieldsService.getFields();
             return new SuccessResponse(data);
         } catch (error) {
             throw new InternalServerErrorException(error);

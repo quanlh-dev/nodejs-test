@@ -1,11 +1,6 @@
-import { ColumnOfEntityWithAlias, BaseEntity } from '~common';
-import _, { isNil } from 'lodash';
-
-export function convertEnumToValues(enumType: any): any[] {
-    type EnumValueType = [`${typeof enumType}`];
-    const values: EnumValueType[] = Object.values(enumType);
-    return values;
-}
+import _ from 'lodash';
+import { BaseEntity } from 'typeorm';
+import { ColumnOfEntityWithAlias } from '~common';
 
 export function columnsWithAlias<T extends BaseEntity>(
     tables: ColumnOfEntityWithAlias<T>[],
@@ -21,8 +16,4 @@ export function columnsWithAlias<T extends BaseEntity>(
             }
         }),
     );
-}
-
-export function isEmptyValue(value: any): boolean {
-    return value === '' || isNil(value) || isNaN(value);
 }

@@ -1,4 +1,3 @@
-export * from './controller.base';
 export * from './dto.base';
 export * from './repository.base';
 export * from './query-builder.base';
